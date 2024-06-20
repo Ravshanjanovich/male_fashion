@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 
 
-
+UserModel = get_user_model()
 
 
 class Category(BaseModel):
@@ -91,19 +91,47 @@ class ProductModel(BaseModel):
     def __str__(self):
         return f"{self.title},{self.short},{self.brand},{self.tags}"
 
+    
+    def is_discount(self):
+        return bool(self.discount)
+
+    def new(self):
+        return (timezone.now() -  self.created_at).days <= 7
+
+    @staticmethod
+    def get_cart_info(self):
+        cart = request.session.get("cart" , [])
+        if not cart:
+            return  0.0
+        return len(cart), ProductModel.objects.filter(id__in=cart).aggregate(Sum("real_price"))
+
+    @staticmethod
+    def get_cart_objects(self):
+        cart = request.objects.get('cart', [])
+        if not cart:
+            return None
+        return ProductModel.objects.filter(id__in=cart)
+
     class Meta:
         db_table = 'Products'
-        verbose_name = "ProductModel"
-        verbose_name_plural = "ProductModels"
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
 
 
 class WishList(BaseModel):
-    user = models.ForeignKey(User , on_delete=models.CASCADE, verbose_name=_("user"), related_name='wishlist')
+    user = models.ForeignKey(UserModel , on_delete=models.CASCADE, verbose_name=_("user"), related_name='wishlist')
     product = models.ForeignKey(ProductModel, on_delete=models.CASCADE, related_name='wishlist', verbose_name=_('product'))
     
 
     def __str__(self):
         return f"{self.user.get_full_name()} | {self.product.title}"
+
+    @staticmethod
+    def created_or_delete(user, product):
+        try:
+            return WishList.objects.create( user=user, product=product)
+        except IntegrityError:
+            return WishList.objects.get( user=user , product=product)
 
     class Meta:
         db_table = 'Wishlist'
@@ -113,4 +141,6 @@ class WishList(BaseModel):
 
 
     
+
+
 
