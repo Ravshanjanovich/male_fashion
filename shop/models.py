@@ -20,7 +20,7 @@ class Category(BaseModel):
     class Meta:
         db_table = 'Cate'
         verbose_name = 'Category'
-        verbose_name_plural = 'Categorys'
+        verbose_name_plural = '2.Categories'
 
 
 class BrandModel(models.Model):
@@ -31,9 +31,9 @@ class BrandModel(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'Brending'
-        verbose_name = 'Brending'
-        verbose_name_plural = 'Breinding'
+        db_table = 'Brends'
+        verbose_name = 'Brend'
+        verbose_name_plural = '3.Brands'
 
 
 class SizeModel(models.Model):
@@ -46,7 +46,7 @@ class SizeModel(models.Model):
     class Meta:
         db_table = 'Size'
         verbose_name = 'Size'
-        verbose_name_plural = 'Sizes'
+        verbose_name_plural = '4.Sizes'
 
 class ColorModel(models.Model):
     code = models.CharField(max_length=50, verbose_name=_("color"))
@@ -58,7 +58,7 @@ class ColorModel(models.Model):
     class Meta:
         db_table = 'Colors'
         verbose_name = 'Color'
-        verbose_name_plural = 'Colors'
+        verbose_name_plural = '5.Colors'
 
 class TagModel(models.Model):
     name = models.CharField(max_length=50, verbose_name=_("tag name"))
@@ -70,7 +70,7 @@ class TagModel(models.Model):
     class Meta:
         db_table = 'Tags'
         verbose_name = 'Tag'
-        verbose_name_plural = "Tags"
+        verbose_name_plural = "6.Tags"
 
 class ProductModel(BaseModel):
     title = models.CharField(max_length=40, verbose_name=_("title"))
@@ -89,7 +89,7 @@ class ProductModel(BaseModel):
 
 
     def __str__(self):
-        return f"{self.title},{self.short},{self.brand},{self.tags}"
+        return f"{self.title},{self.short_desc},{self.brand},{self.tags}"
 
     
     def is_discount(self):
@@ -104,7 +104,7 @@ class ProductModel(BaseModel):
         if not cart:
             return  0.0
         return len(cart), ProductModel.objects.filter(id__in=cart).aggregate(Sum("real_price"))
-
+                                        
     @staticmethod
     def get_cart_objects(self):
         cart = request.objects.get('cart', [])
@@ -115,7 +115,7 @@ class ProductModel(BaseModel):
     class Meta:
         db_table = 'Products'
         verbose_name = "Product"
-        verbose_name_plural = "Products"
+        verbose_name_plural = "1.Products"
 
 
 class WishList(BaseModel):

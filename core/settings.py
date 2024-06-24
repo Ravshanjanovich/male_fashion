@@ -32,6 +32,7 @@ DJANGO_APPS = [
 
 CUSTOM_APPS = [
     'shop',
+    'blog',
 ]
 
 THIRD_PART_APPS = [
@@ -143,20 +144,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Jazzmin settings
 JAZZMIN_SETTINGS = {
-    # title of the window (Will default to current_admin_site.site_title if absent or None)
-    "site_title": "Library Admin",
+# title of the window (Will default to current_admin_site.site_title if absent or None)
+    "site_title": "Male Fashion Admin",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "Library",
+    "site_header": "Male Fashion Admin",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "Library",
+    "site_brand": "Male Fashion Admin",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "books/img/logo.png",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
-    "login_logo": None,
+    "login_logo": False,
 
     # Logo to use for login form in dark themes (defaults to login_logo)
     "login_logo_dark": None,
@@ -165,20 +165,20 @@ JAZZMIN_SETTINGS = {
     "site_logo_classes": "img-circle",
 
     # Relative path to a favicon for your site, will default to site_logo if absent (ideally 32x32 px)
-    "site_icon": None,
+    "site_icon": True,
 
     # Welcome text on the login screen
     "welcome_sign": "Welcome to the library",
 
     # Copyright on the footer
-    "copyright": "Acme Library Ltd",
+    "copyright": "Aslbek & D❤️ Family",
 
     # List of model admins to search from the search bar, search bar omitted if excluded
     # If you want to use a single search field you dont need to use a list, you can use a simple string 
     "search_model": ["auth.User", "auth.Group"],
 
     # Field name on user model that contains avatar ImageField/URLField/Charfield or a callable that receives the user
-    "user_avatar": None,
+    "user_avatar": False,
 
     ############
     # Top Menu #
@@ -234,7 +234,7 @@ JAZZMIN_SETTINGS = {
         "books": [{
             "name": "Make Messages", 
             "url": "make_messages", 
-            "icon": "fas fa-comments",
+            "icon": " fas fa-comments",
             "permissions": ["books.view_book"]
         }]
     },
@@ -245,6 +245,12 @@ JAZZMIN_SETTINGS = {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
+        "shop.ProductModel":"fas fa-solid fa-cart-arrow-down",
+        "shop.BrandModel":"fas fa-light fa-copyright",
+        "shop.Category":"fas fa-solid fa-list",
+        "shop.ColorModel":"fas fa-solid fa-palette",
+        "shop.TagModel":"fas fa-solid fa-tags",
+        "shop.SizeModel":"fas fa-light fa-expand"
     },
     # Icons that are used when one is not manually specified
     "default_icon_parents": "fas fa-chevron-circle-right",
@@ -260,12 +266,12 @@ JAZZMIN_SETTINGS = {
     # UI Tweaks #
     #############
     # Relative paths to custom CSS/JS scripts (must be present in static files)
-    "custom_css": None,
+    "custom_css": True,
     "custom_js": True,
     # Whether to link font from fonts.googleapis.com (use custom_css to supply font otherwise)
     "use_google_fonts_cdn": True,
     # Whether to show the UI customizer on the sidebar
-    "show_ui_builder": False,
+    "show_ui_builder": True,
 
     ###############
     # Change view #
@@ -281,4 +287,10 @@ JAZZMIN_SETTINGS = {
     "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
     # Add a language dropdown into the admin
     "language_chooser": False,
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "slate",
+    "dark_mode_theme": "cyborg",
+    "navbar": "gray-dark"
 }

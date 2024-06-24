@@ -1,0 +1,107 @@
+{% load static%}
+<div class="col-lg-3">
+    <div class="shop__sidebar">
+        <div class="shop__sidebar__search">
+            <form action="{% url 'shop:home' %}">
+                <input name="search" value="{{ request.GET.search }}"  type="text" placeholder="Search...">
+                <button type="submit"><span class="icon_search"></span></button>
+            </form>
+        </div>
+        <div class="shop__sidebar__accordion">
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-heading">
+                        <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                    </div>
+                    <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="shop__sidebar__categories">
+                                <ul class="nice-scroll">\
+                                    {% for cat in categories %}
+                                        <li><a onclick="addUrlParametr('cat', {{ cat.pk}} )" class="{% if request.GET.cat == cat.pk|stringformat:'i'%}text-dark{% endif %}">{{ cat.name }}({{ cat.products.count }})</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-heading">
+                        <a data-toggle="collapse" data-target="#collapseTwo">Branding</a>
+                    </div>
+                    <div id="collapseTwo" class="collapse show" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="shop__sidebar__brand">
+                                <ul>
+                                    {% for brand in brands %}
+                                        <li><a onclick="addUrlParametr('brand', {{ brand.pk}} )" class="{% if  request.GET.brand == brand.pk|stringformat:'i'%}text-red{% endif %}">{{brand.name}}({{ brand.products.count}})</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-heading">
+                        <a data-toggle="collapse" data-target="#collapseThree">Filter Price</a>
+                    </div>
+                    <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="shop__sidebar__price">
+                                <ul>
+                                    {% for p in sizes %}
+                                        <a onclick="addUrlParametr('size' {{ size.pk }})">#{{ size.name}}</a>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-heading">
+                        <a data-toggle="collapse" data-target="#collapseFour">Size</a>
+                    </div>
+                    <div id="collapseFour" class="collapse show" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="shop__sidebar__size">
+                            {% for size in sizes %}
+                                <label onclick="addUrlParametr(size {{ size.pk}})">#{{ size.name }}</label>
+                            {% endfor %}    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-heading">
+                        <a data-toggle="collapse" data-target="#collapseFive">Colors</a>
+                    </div>
+                    <div id="collapseFive" class="collapse show" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="shop__sidebar__color">
+                            {% for color in colors %} 
+                                <label class="c-1" for="{{ color.code }}">
+                                    <input onclick="addUrlParametr(color, {{ color.pk }})" type="radio" id="{{ color.code }}">
+                                </label>
+                            {% endfor %}   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-heading">
+                        <a data-toggle="collapse" data-target="#collapseSix">Tags</a>
+                    </div>
+                    <div id="collapseSix" class="collapse show" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="shop__sidebar__tags">
+                            {% for tag in tags %}
+                                <a onclick="addUrlParametr(tag {{ tag.pk }})" href="#">{{ tag.name }}</a>
+                            {% endfor %}   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

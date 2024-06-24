@@ -48,6 +48,7 @@ class SizeAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('title', 'long_desc',)
     list_display_links = ('title', 'long_desc',)
+    search_fields = ("title",)
 
 
 # class ProductAdmin(admin.ModelAdmin):
