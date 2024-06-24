@@ -49,12 +49,10 @@
                         <div class="card-body">
                             <div class="shop__sidebar__price">
                                 <ul>
-                                    {% for p in sizes %}
-                                        <a onclick="addUrlParametr('size' {{ size.pk }})">#{{ size.name}}</a>
-                                    {% endfor %}
+                                    <input type="text" class="js-range-slider" name="my_range" value="/">
                                 </ul>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                 </div>
                 <div class="card">

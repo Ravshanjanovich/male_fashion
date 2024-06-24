@@ -1,5 +1,6 @@
 {% extends 'layouts/base.html'%}
 {% load static %}
+{% load custom_tags %}
 {% block content %}
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option">
@@ -68,4 +69,34 @@
         </div>
     </section>
     <!-- Shop Section End -->
-{% endblock %}   
+{% endblock %} 
+{% block extra_js %}  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+<script>
+    function addUrlParametr(name, value){
+        let searchParameter = new URLSearchParams(window.location.search);
+        if (searchParameter.has(name) && searchParameter.get(name) == value) {
+            // Agar parametr allaqachon mavjud bo'lsa va qiymat teng bo'lsa, hech narsa qilmaymiz
+        } else {
+            // Parametr mavjud emas yoki qiymat boshqa bo'lsa, yangilaymiz
+            searchParameter.set(name, value);
+        }
+        window.location.search = searchParameter.toString();
+    }
+
+    $(".js-range-slider").ionRangeSlider({
+        type: "double",
+        min: {{ min_price }},
+        max: {{ max_price }},
+        from: {% get_current_price request 0 %},
+        to: {% get_current_price request 1 %},
+        grid: true,
+        prefix: "$",
+        onFinish: function(data) {
+            addUrlParametr("price", data.from.toString() + ';' + data.to.toString());
+        }
+    });
+</script>
+
+{% endblock %}
