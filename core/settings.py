@@ -33,6 +33,7 @@ DJANGO_APPS = [
 CUSTOM_APPS = [
     'shop',
     'blog',
+    'pages',
 ]
 
 THIRD_PART_APPS = [
