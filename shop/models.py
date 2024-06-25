@@ -119,10 +119,13 @@ class ProductModel(BaseModel):
 
 
 class WishList(BaseModel):
-    user = models.ForeignKey(UserModel , on_delete=models.CASCADE, verbose_name=_("user"), related_name='wishlist')
-    product = models.ForeignKey(ProductModel, on_delete=models.CASCADE, related_name='wishlist', verbose_name=_('product'))
+    user = models.OneToOneField(UserModel , on_delete=models.CASCADE)
     
-
+class WishlistItem(models.Model):
+    wishlist = models.ForeignKey(WishList, related_name='items', on_delete=models.CASCADE, verbose_name=_("wishlist"))
+    product = models.ForeignKey(ProductModel, on_delete=models.CASCADE, related_name='items',verbose_name=_("product"))
+    
+    
     def __str__(self):
         return f"{self.user.get_full_name()} | {self.product.title}"
 
@@ -137,7 +140,7 @@ class WishList(BaseModel):
         db_table = 'Wishlist'
         verbose_name = 'Wishlist'
         verbose_name_plural = 'WishLists'
-        unique_together = 'user', 'product',
+        unique_together = 'wishlist', 'product',
 
 
     

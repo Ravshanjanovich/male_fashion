@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load custom_tags %}
 
 <div class="product__item sale">
     <div class="product__item__pic set-bg" data-setbg="{{ product.main_image.url }}">
@@ -21,11 +21,6 @@
     <div class="product__item__text">
         <h6>{{ product.title }}</h6>
         <a href="{% url 'shop:cart' id=product.pk %}?next={{ request.path }}" class="add-cart">
-            {% if product|is_cart:request %}
-                -Remove From Cart
-            {% else %}
-                +Add To Cart
-            {% endif %}
         </a>
         <div class="rating">
             <i class="fa fa-star"></i>
