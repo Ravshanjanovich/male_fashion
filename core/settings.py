@@ -34,6 +34,7 @@ CUSTOM_APPS = [
     'shop',
     'blog',
     'pages',
+    'users'
 ]
 
 THIRD_PART_APPS = [
