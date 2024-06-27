@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from pages.forms import ContactForm
-from pages.models import Banner
+from pages.models import Banner, MapsModel
 from django.views.generic import TemplateView, CreateView
 from blog.models import Post
 from django.urls import reverse
+from django.db.models.query import QuerySet
 
 
 class HomePage(TemplateView):
@@ -24,3 +25,6 @@ class ContactView(CreateView):
 
     def get_success_url(self):
         return reverse("pages:contact")
+
+    def get_queryset(self):
+        return MapsModel.objects.all()

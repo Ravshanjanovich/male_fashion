@@ -251,7 +251,13 @@ JAZZMIN_SETTINGS = {
         "shop.Category":"fas fa-solid fa-list",
         "shop.ColorModel":"fas fa-solid fa-palette",
         "shop.TagModel":"fas fa-solid fa-tags",
-        "shop.SizeModel":"fas fa-light fa-expand"
+        "shop.SizeModel":"fas fa-light fa-expand",
+        "pages.Banner":"fas fa-solid fa-table",
+        "pages.Contact":"fas fa-regular fa-id-card",
+        "blog.Author":"fas fa-regular fa-id-card",
+        "blog.Comment":"fas fa-solid fa-comments",
+        "blog.PostTag":"fas fa-solid fa-hashtag",
+        "blog.Post":"fas fa-solid fa-bars"
     },
     # Icons that are used when one is not manually specified
     "default_icon_parents": "fas fa-chevron-circle-right",

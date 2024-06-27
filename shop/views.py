@@ -59,6 +59,9 @@ class Shop(ListView):
             qs = qs.filter(real_price__gte=min_price, real_price__lte=max_price)
         
         return qs
+    
+    def get_success_url(self):
+        return reverse("shop")
 
     
 
